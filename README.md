@@ -21,19 +21,20 @@ A premium, high-performance web application for Lazord Dental Lab, featuring imm
 
 ## 📦 Deployment
 
-The project is built and ready for deployment.
+The project is configured for automatic deployment via **GitHub Actions**.
 
-1. Install dependencies:
+1. **Push to GitHub**: Every push to the `main` branch will trigger a build and deploy to GitHub Pages.
+2. **Base Path**: The application is configured with the base path `/lazord-Clinic-Task/` to ensure all assets load correctly on GitHub Pages.
+3. **Local Testing**:
    ```bash
    npm install
+   npm run dev
    ```
-
-2. Build for production:
+4. **Manual Build**:
    ```bash
    npm run build
    ```
-
-3. The output will be in the `dist` directory, ready to be hosted on any static hosting service (GitHub Pages, Vercel, Netlify, etc.).
+   The output in `dist/` is optimized for production hosting.
 
 ## 🌐 SEO & Social
 

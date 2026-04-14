@@ -2,13 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import zirconiaImg from '../../assets/images/Zirconia Crowns.png';
-import implantImg from '../../assets/images/Implant Solutions.png';
-import denturesImg from '../../assets/images/Full Dentures.png';
-import partialsImg from '../../assets/images/Removable Partial Dentures.png';
-import guardsImg from '../../assets/images/3D Printed Night Guards.png';
-import alignersImg from '../../assets/images/Clear Aligners.png';
-import apneaImg from '../../assets/images/Sleep Apnea Devices.png';
+import zirconiaImg from '../assets/images/Zirconia Crowns.png';
+import implantImg from '../assets/images/Implant Solutions.png';
+import denturesImg from '../assets/images/Full Dentures.png';
+import partialsImg from '../assets/images/Removable Partial Dentures.png';
+import guardsImg from '../assets/images/3D Printed Night Guards.png';
+import alignersImg from '../assets/images/Clear Aligners.png';
+import apneaImg from '../assets/images/Sleep Apnea Devices.png';
 
 gsap.registerPlugin(ScrollTrigger);
 

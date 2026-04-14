@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import digitalScanImg from '../../assets/images/digital scanlond.png';
+import digitalScanImg from '../assets/images/digital scanlond.png';
 
 gsap.registerPlugin(ScrollTrigger);
 

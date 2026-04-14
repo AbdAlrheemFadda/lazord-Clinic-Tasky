@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Sparkles, Text, Environment, Center } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
+import implantBg from '../assets/images/dental-implant.png';
 
 const ImplantPart = ({ position, rotation, color, metalness, roughness, geometry, delay, name }: any) => {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -126,7 +127,7 @@ export const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
   return (
     <div ref={containerRef} className="splash-screen">
       <div className="splash-img-bg" style={{ 
-        backgroundImage: 'url(/assets/images/dental-implant.png)',
+        backgroundImage: `url(${implantBg})`,
         opacity: 0.03,
         position: 'absolute',
         inset: 0,

@@ -5,6 +5,11 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import clinicImg from '../assets/images/clinic-interior.png';
+import techImg from '../assets/images/dental-technology.png';
+import smileImg from '../assets/images/smile-closeup.png';
+import crownImg from '../assets/images/dental-crown.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
 // Holographic UI elements component
@@ -68,10 +73,10 @@ export const Scene = () => {
 
   // Load project images
   const textures = useTexture({
-    clinic: '/assets/images/clinic-interior.png',
-    tech: '/assets/images/dental-technology.png',
-    smile: '/assets/images/smile-closeup.png',
-    crown: '/assets/images/dental-crown.png'
+    clinic: clinicImg,
+    tech: techImg,
+    smile: smileImg,
+    crown: crownImg
   });
 
   // Thread geometry for the screw
