@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/lazord-Clinic-Task/',
+  base: '/',
   build: {
     chunkSizeWarningLimit: 1000, // Increase limit as we have heavy 3D assets
     rollupOptions: {
