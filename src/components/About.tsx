@@ -1,27 +1,24 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import best1Img from '../assets/images/best1.png';
 import best2Img from '../assets/images/best2.png';
 import best3Img from '../assets/images/best3.png';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const cards = [
   {
-    title: 'تطوير مهارات كل عضو من الموظفين',
-    description: 'اجعل مساعديك يقومون بالمسح بثقة لكل سير عمل رقمي - استفد من التدريب غير المحدود لفريقك كلما دعت الحاجة.',
+    title: 'طھط·ظˆظٹط± ظ…ظ‡ط§ط±ط§طھ ظƒظ„ ط¹ط¶ظˆ ظ…ظ† ط§ظ„ظ…ظˆط¸ظپظٹظ†',
+    description: 'ط§ط¬ط¹ظ„ ظ…ط³ط§ط¹ط¯ظٹظƒ ظٹظ‚ظˆظ…ظˆظ† ط¨ط§ظ„ظ…ط³ط­ ط¨ط«ظ‚ط© ظ„ظƒظ„ ط³ظٹط± ط¹ظ…ظ„ ط±ظ‚ظ…ظٹ - ط§ط³طھظپط¯ ظ…ظ† ط§ظ„طھط¯ط±ظٹط¨ ط؛ظٹط± ط§ظ„ظ…ط­ط¯ظˆط¯ ظ„ظپط±ظٹظ‚ظƒ ظƒظ„ظ…ط§ ط¯ط¹طھ ط§ظ„ط­ط§ط¬ط©.',
     image: best1Img,
   },
   {
-    title: 'تحسين تجربة المريض',
-    description: 'ارفع مستوى رعاية المرضى من خلال ابتكارات مثل أطقم الأسنان ذات الموعد النهائي، والأجزاء الجزئية المباشرة إلى النهاية، والماسح الضوئي رقم 1 في طب الأسنان الترميمي.',
+    title: 'طھط­ط³ظٹظ† طھط¬ط±ط¨ط© ط§ظ„ظ…ط±ظٹط¶',
+    description: 'ط§ط±ظپط¹ ظ…ط³طھظˆظ‰ ط±ط¹ط§ظٹط© ط§ظ„ظ…ط±ط¶ظ‰ ظ…ظ† ط®ظ„ط§ظ„ ط§ط¨طھظƒط§ط±ط§طھ ظ…ط«ظ„ ط£ط·ظ‚ظ… ط§ظ„ط£ط³ظ†ط§ظ† ط°ط§طھ ط§ظ„ظ…ظˆط¹ط¯ ط§ظ„ظ†ظ‡ط§ط¦ظٹطŒ ظˆط§ظ„ط£ط¬ط²ط§ط، ط§ظ„ط¬ط²ط¦ظٹط© ط§ظ„ظ…ط¨ط§ط´ط±ط© ط¥ظ„ظ‰ ط§ظ„ظ†ظ‡ط§ظٹط©طŒ ظˆط§ظ„ظ…ط§ط³ط­ ط§ظ„ط¶ظˆط¦ظٹ ط±ظ‚ظ… 1 ظپظٹ ط·ط¨ ط§ظ„ط£ط³ظ†ط§ظ† ط§ظ„طھط±ظ…ظٹظ…ظٹ.',
     image: best2Img,
   },
   {
-    title: 'زيادة القدرة على التنبؤ بالعلاج',
-    description: 'استخدم أدوات المسح المتقدمة - تصور التصميمات الرقمية والموافقة عليها، وتعزيز نتائج قبول الحالة، وتقديم نتائج ناجحة للمرضى مع التحكم المطلق.',
+    title: 'ط²ظٹط§ط¯ط© ط§ظ„ظ‚ط¯ط±ط© ط¹ظ„ظ‰ ط§ظ„طھظ†ط¨ط¤ ط¨ط§ظ„ط¹ظ„ط§ط¬',
+    description: 'ط§ط³طھط®ط¯ظ… ط£ط¯ظˆط§طھ ط§ظ„ظ…ط³ط­ ط§ظ„ظ…طھظ‚ط¯ظ…ط© - طھطµظˆط± ط§ظ„طھطµظ…ظٹظ…ط§طھ ط§ظ„ط±ظ‚ظ…ظٹط© ظˆط§ظ„ظ…ظˆط§ظپظ‚ط© ط¹ظ„ظٹظ‡ط§طŒ ظˆطھط¹ط²ظٹط² ظ†طھط§ط¦ط¬ ظ‚ط¨ظˆظ„ ط§ظ„ط­ط§ظ„ط©طŒ ظˆطھظ‚ط¯ظٹظ… ظ†طھط§ط¦ط¬ ظ†ط§ط¬ط­ط© ظ„ظ„ظ…ط±ط¶ظ‰ ظ…ط¹ ط§ظ„طھط­ظƒظ… ط§ظ„ظ…ط·ظ„ظ‚.',
     image: best3Img,
   },
 ];
@@ -31,7 +28,6 @@ export const About = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Fade in cards sequentially
       gsap.from('.about-card-rich', {
         y: 60,
         opacity: 0,
@@ -47,15 +43,15 @@ export const About = () => {
   return (
     <section id="about" ref={sectionRef} className="about-section container">
       <div className="section-header">
-        <h2>تحقيق نتائج أفضل لممارستك ومرضاك</h2>
+        <h2>طھط­ظ‚ظٹظ‚ ظ†طھط§ط¦ط¬ ط£ظپط¶ظ„ ظ„ظ…ظ…ط§ط±ط³طھظƒ ظˆظ…ط±ط¶ط§ظƒ</h2>
       </div>
 
       <div className="about-rich-grid">
-        {cards.map((card, idx) => (
-          <div key={idx} className="about-card-rich glass-panel">
-            <div className="image-glow-backdrop"></div>
+        {cards.map((card) => (
+          <div key={card.title} className="about-card-rich glass-panel">
+            <div className="image-glow-backdrop" />
             <div className="about-card-image-wrapper">
-              <img src={card.image} alt={card.title} className="about-card-img" />
+              <img src={card.image} alt={card.title} className="about-card-img" loading="lazy" />
             </div>
             <div className="about-card-content">
               <h3>{card.title}</h3>
@@ -81,7 +77,7 @@ export const About = () => {
           overflow: hidden;
           padding: 0;
           transition: transform 0.6s var(--transition-smooth), box-shadow 0.6s;
-          background: rgba(10, 25, 34, 0.5); /* Deep dark navy base */
+          background: rgba(10, 25, 34, 0.5);
           border: 1px solid rgba(126, 200, 184, 0.1);
         }
 
@@ -91,7 +87,6 @@ export const About = () => {
           border-color: rgba(126, 200, 184, 0.3);
         }
 
-        /* Soft glow behind the image for high-tech aesthetic */
         .image-glow-backdrop {
           position: absolute;
           top: 0;
@@ -131,7 +126,6 @@ export const About = () => {
           transition: transform 0.8s var(--transition-smooth);
         }
 
-        /* Adding the subtle floating element animation */
         @keyframes float-img {
           0% { transform: translateY(0px) scale(1); }
           50% { transform: translateY(-4px) scale(1.02); }
@@ -160,7 +154,7 @@ export const About = () => {
         }
 
         .about-card-content p {
-          color: var(--text-main); /* White/very light grey for body text as requested */
+          color: var(--text-main);
           line-height: 1.7;
           font-size: 0.95rem;
           margin: 0;

@@ -1,19 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const AnimatedNumber = ({ target, prefix = '', suffix = '' }: { target: number; prefix?: string; suffix?: string }) => {
-  const [display, setDisplay] = useState(0);
   const ref = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     if (!ref.current) return;
 
+    const el = ref.current;
     const obj = { val: 0 };
     ScrollTrigger.create({
-      trigger: ref.current,
+      trigger: el,
       start: 'top 90%',
       once: true,
       onEnter: () => {
@@ -22,20 +20,24 @@ const AnimatedNumber = ({ target, prefix = '', suffix = '' }: { target: number; 
           duration: 2.5,
           ease: 'power3.out',
           onUpdate: () => {
-            // For numbers with decimals like 1.5
             const hasDecimals = target % 1 !== 0;
-            const formatted = hasDecimals 
-              ? obj.val.toFixed(1) 
+            const formatted = hasDecimals
+              ? obj.val.toFixed(1)
               : Math.round(obj.val).toString();
-            
-            ref.current!.innerText = `${prefix}${formatted}${suffix}`;
+            if (el) {
+              el.innerText = `${prefix}${formatted}${suffix}`;
+            }
           },
         });
       },
     });
   }, [target, prefix, suffix]);
 
-  return <h2 className="stat-value" ref={ref} style={{ direction: 'ltr', display: 'inline-block' }}>{prefix}0{suffix}</h2>;
+  return (
+    <h2 className="stat-value" ref={ref} style={{ direction: 'ltr', display: 'inline-block' }}>
+      {prefix}0{suffix}
+    </h2>
+  );
 };
 
 export const Stats = () => {
@@ -54,7 +56,7 @@ export const Stats = () => {
           start: 'top 80%',
         },
       });
-      
+
       gsap.from('.stats-title', {
         y: 30,
         opacity: 0,
@@ -74,30 +76,30 @@ export const Stats = () => {
     <section className="stats-section container" ref={sectionRef}>
       <div className="section-header">
         <h2 className="stats-title" style={{ maxWidth: '800px', margin: '0 auto', lineHeight: '1.4' }}>
-          الآلاف من الممارسات تثق في لازورد في أعمالها المخبرية
+          ط§ظ„ط¢ظ„ط§ظپ ظ…ظ† ط§ظ„ظ…ظ…ط§ط±ط³ط§طھ طھط«ظ‚ ظپظٹ ظ„ط§ط²ظˆط±ط¯ ظپظٹ ط£ط¹ظ…ط§ظ„ظ‡ط§ ط§ظ„ظ…ط®ط¨ط±ظٹط©
         </h2>
       </div>
 
       <div className="stats-grid">
         <div className="stat-card glass-panel breathable-card">
           <AnimatedNumber target={50} prefix="+" suffix="K" />
-          <p className="stat-label">تقييمات حالة 5 نجوم</p>
+          <p className="stat-label">طھظ‚ظٹظٹظ…ط§طھ ط­ط§ظ„ط© 5 ظ†ط¬ظˆظ…</p>
         </div>
         <div className="stat-card glass-panel breathable-card">
           <AnimatedNumber target={30} prefix="$" suffix="K" />
-          <p className="stat-label">تم الحفظ مقدماً</p>
+          <p className="stat-label">طھظ… ط§ظ„ط­ظپط¸ ظ…ظ‚ط¯ظ…ط§ظ‹</p>
         </div>
         <div className="stat-card glass-panel breathable-card">
           <AnimatedNumber target={1.5} prefix="+" suffix="M" />
-          <p className="stat-label">تم تسليم الابتسامات السعيدة</p>
+          <p className="stat-label">طھظ… طھط³ظ„ظٹظ… ط§ظ„ط§ط¨طھط³ط§ظ…ط§طھ ط§ظ„ط³ط¹ظٹط¯ط©</p>
         </div>
       </div>
 
       <style>{`
         .stats-section {
-          padding: 140px 0; /* Plenty of whitespace */
+          padding: 140px 0;
         }
-        
+
         .breathable-card {
           padding: 60px 40px !important;
           text-align: center;
@@ -125,7 +127,7 @@ export const Stats = () => {
           background: none !important;
           -webkit-text-fill-color: var(--accent-cyan) !important;
           text-shadow: 0 0 30px rgba(126, 200, 184, 0.2);
-          font-family: 'Inter', sans-serif; /* High contrast numbers */
+          font-family: 'Inter', sans-serif;
           letter-spacing: -0.02em;
         }
 

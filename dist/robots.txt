@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lazord-dental.com/sitemap.xml
+Sitemap: https://AbdAlrheemFadda.github.io/lazord-Clinic-Task/sitemap.xml

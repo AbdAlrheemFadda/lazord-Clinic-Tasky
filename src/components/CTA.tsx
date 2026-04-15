@@ -1,8 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export const CTA = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -24,11 +21,11 @@ export const CTA = () => {
   return (
     <section ref={sectionRef} className="cta-section container">
       <div className="cta-box glass-panel">
-        <h2>هل أنت جديد في مجال المسح الضوئي؟</h2>
+        <h2>ظ‡ظ„ ط£ظ†طھ ط¬ط¯ظٹط¯ ظپظٹ ظ…ط¬ط§ظ„ ط§ظ„ظ…ط³ط­ ط§ظ„ط¶ظˆط¦ظٹطں</h2>
         <p>
-          تقديم نتائج متوقعة للمرضى باستخدام التكنولوجيا والأدوات المبتكرة التي تمنحك التحكم النهائي. احصل على الماسح الضوئي 3Shape TRIOS المجاني مع تدريب ودعم غير محدود.
+          طھظ‚ط¯ظٹظ… ظ†طھط§ط¦ط¬ ظ…طھظˆظ‚ط¹ط© ظ„ظ„ظ…ط±ط¶ظ‰ ط¨ط§ط³طھط®ط¯ط§ظ… ط§ظ„طھظƒظ†ظˆظ„ظˆط¬ظٹط§ ظˆط§ظ„ط£ط¯ظˆط§طھ ط§ظ„ظ…ط¨طھظƒط±ط© ط§ظ„طھظٹ طھظ…ظ†ط­ظƒ ط§ظ„طھط­ظƒظ… ط§ظ„ظ†ظ‡ط§ط¦ظٹ. ط§ط­طµظ„ ط¹ظ„ظ‰ ط§ظ„ظ…ط§ط³ط­ ط§ظ„ط¶ظˆط¦ظٹ 3Shape TRIOS ط§ظ„ظ…ط¬ط§ظ†ظٹ ظ…ط¹ طھط¯ط±ظٹط¨ ظˆط¯ط¹ظ… ط؛ظٹط± ظ…ط­ط¯ظˆط¯.
         </p>
-        <button className="btn-primary">احصل على الماسح الضوئي المجاني</button>
+        <button className="btn-primary">ط§ط­طµظ„ ط¹ظ„ظ‰ ط§ظ„ظ…ط§ط³ط­ ط§ظ„ط¶ظˆط¦ظٹ ط§ظ„ظ…ط¬ط§ظ†ظٹ</button>
       </div>
     </section>
   );

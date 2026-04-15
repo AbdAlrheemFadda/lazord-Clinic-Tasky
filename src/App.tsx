@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, Suspense } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -17,21 +17,24 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { Scene } from './components/Scene';
 import { SplashScreen } from './components/SplashScreen';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   const [showSplash, setShowSplash] = React.useState(true);
   const mainRef = useRef<HTMLElement>(null);
+  const rafIdRef = useRef<number>(0);
+  const gsapCtxRef = useRef<gsap.Context | null>(null);
 
   useEffect(() => {
     // Scroll to top on load/splash complete
     if (!showSplash) {
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0 });
     }
   }, [showSplash]);
 
-  // Smooth scrolling with Lenis
+  // Smooth scrolling with Lenis — fixed RAF memory leak
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.8,
@@ -45,38 +48,33 @@ export default function App() {
 
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafIdRef.current = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafIdRef.current = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafIdRef.current);
       lenis.destroy();
     };
   }, []);
 
-  // Cinematic scroll-based section reveals
+  // Cinematic scroll-based section reveals — fixed GSAP cleanup
   useEffect(() => {
     if (showSplash) return;
 
-    // Wait a frame for DOM to be ready
     const timer = setTimeout(() => {
       const ctx = gsap.context(() => {
         const sections = gsap.utils.toArray('main > section') as HTMLElement[];
 
         sections.forEach((section, index) => {
-          // Hero section (first) — always visible, no scroll animation
           if (index === 0) {
             gsap.set(section, { opacity: 1, y: 0 });
             return;
           }
 
-          // Each subsequent section gets a cinematic reveal
           gsap.fromTo(
             section,
-            {
-              opacity: 0,
-              y: 60,
-            },
+            { opacity: 0, y: 60 },
             {
               opacity: 1,
               y: 0,
@@ -91,7 +89,6 @@ export default function App() {
             }
           );
 
-          // Parallax-like depth for section inner content
           const header = section.querySelector('.section-header');
           if (header) {
             gsap.fromTo(
@@ -113,39 +110,54 @@ export default function App() {
         });
       }, mainRef.current!);
 
-      return () => ctx.revert();
+      // Store context in ref so cleanup can always reach it
+      gsapCtxRef.current = ctx;
     }, 100);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      // Revert context if it was created before unmount
+      if (gsapCtxRef.current) {
+        gsapCtxRef.current.revert();
+        gsapCtxRef.current = null;
+      }
+    };
   }, [showSplash]);
 
   return (
     <>
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
-      
-      <div className="canvas-container">
-        <Canvas
-          camera={{ position: [0, 0, 6], fov: 40 }}
-          dpr={[1, 2]}
-          gl={{ antialias: true, alpha: true }}
-        >
-          <Scene />
-        </Canvas>
-      </div>
+
+      {/* Only mount the main 3D Canvas after splash is done — prevents dual WebGL context */}
+      {!showSplash && (
+        <div className="canvas-container">
+          <ErrorBoundary fallback={null}>
+            <Canvas
+              camera={{ position: [0, 0, 6], fov: 40 }}
+              dpr={[1, 2]}
+              gl={{ antialias: true, alpha: true }}
+            >
+              <Suspense fallback={null}>
+                <Scene />
+              </Suspense>
+            </Canvas>
+          </ErrorBoundary>
+        </div>
+      )}
 
       <div className={`app-content ${showSplash ? 'hidden' : 'visible'}`}>
         <Navbar />
         <main ref={mainRef}>
           <Hero />
-          <Innovation /> {/* Section 2: Future of Digital Dentistry */}
-          <RestorativeSolutions /> {/* Section 3 */}
-          <Services /> {/* Section 4: Products */}
-          <Workflow /> {/* Section 5: Workflow Transformation */}
-          <About /> {/* Section 6: Better Results */}
-          <Stats /> {/* Section 7: Statistics Banner */}
-          <Contact /> {/* Section 8: Contact Form */}
-          <Articles /> {/* Section 9: Articles */}
-          <FAQ /> {/* Section 10: FAQ */}
+          <Innovation />
+          <RestorativeSolutions />
+          <Services />
+          <Workflow />
+          <About />
+          <Stats />
+          <Contact />
+          <Articles />
+          <FAQ />
         </main>
         <Footer />
       </div>
@@ -159,13 +171,13 @@ export default function App() {
           opacity: 1;
           transition: opacity 2s var(--transition-smooth);
         }
-        
+
         /* Sections start invisible — GSAP ScrollTrigger handles reveal */
         main > section {
           opacity: 0;
           will-change: opacity, transform;
         }
-        
+
         /* Hero always visible immediately after splash */
         main > section:first-child {
           opacity: 1;

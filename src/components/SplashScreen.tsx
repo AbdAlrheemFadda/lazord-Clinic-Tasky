@@ -1,31 +1,41 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Sparkles, Text, Environment, Center } from '@react-three/drei';
+import { Sparkles, Environment, Center } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import implantBg from '../assets/images/dental-implant.png';
 
-const ImplantPart = ({ position, rotation, color, metalness, roughness, geometry, delay, name }: any) => {
+interface ImplantPartProps {
+  position: [number, number, number];
+  rotation: [number, number, number];
+  color: string;
+  metalness: number;
+  roughness: number;
+  geometry: THREE.BufferGeometry;
+  delay: number;
+  name: string;
+}
+
+const ImplantPart = ({ position, rotation, color, metalness, roughness, geometry, delay }: ImplantPartProps) => {
   const meshRef = useRef<THREE.Mesh>(null);
 
   useEffect(() => {
     if (meshRef.current) {
-      // Disassembling animation
       gsap.to(meshRef.current.position, {
         x: position[0] * 3,
         y: position[1] * 2.5,
         z: position[2] * 2,
         duration: 2.5,
         delay: 1 + delay,
-        ease: "expo.out"
+        ease: 'expo.out',
       });
-      
+
       gsap.to(meshRef.current.rotation, {
         x: (Math.random() - 0.5) * 2,
         y: (Math.random() - 0.5) * 2,
         duration: 3,
         delay: 1 + delay,
-        ease: "power2.out"
+        ease: 'power2.out',
       });
     }
   }, [position, delay]);
@@ -33,10 +43,10 @@ const ImplantPart = ({ position, rotation, color, metalness, roughness, geometry
   return (
     <mesh ref={meshRef} position={[0, 0, 0]} rotation={rotation}>
       <primitive object={geometry} attach="geometry" />
-      <meshPhysicalMaterial 
-        color={color} 
-        metalness={metalness} 
-        roughness={roughness} 
+      <meshPhysicalMaterial
+        color={color}
+        metalness={metalness}
+        roughness={roughness}
         clearcoat={1}
         emissive={color}
         emissiveIntensity={0.03}
@@ -48,19 +58,28 @@ const ImplantPart = ({ position, rotation, color, metalness, roughness, geometry
 const CinematicImplant = () => {
   const groupRef = useRef<THREE.Group>(null);
 
-  useFrame((state) => {
+  // Memoize geometries â€” prevents GPU allocation on every render
+  const crownGeo = useMemo(() => new THREE.CylinderGeometry(0.6, 0.45, 0.8, 32), []);
+  const abutmentGeo = useMemo(() => new THREE.CylinderGeometry(0.3, 0.2, 0.6, 32), []);
+  const screwGeo = useMemo(() => new THREE.CylinderGeometry(0.2, 0.1, 1.2, 32), []);
+
+  useEffect(() => {
+    return () => {
+      crownGeo.dispose();
+      abutmentGeo.dispose();
+      screwGeo.dispose();
+    };
+  }, [crownGeo, abutmentGeo, screwGeo]);
+
+  useFrame(() => {
     if (groupRef.current) {
       groupRef.current.rotation.y += 0.004;
     }
   });
 
-  const crownGeo = new THREE.CylinderGeometry(0.6, 0.45, 0.8, 32);
-  const abutmentGeo = new THREE.CylinderGeometry(0.3, 0.2, 0.6, 32);
-  const screwGeo = new THREE.CylinderGeometry(0.2, 0.1, 1.2, 32);
-
   return (
     <group ref={groupRef}>
-      <ImplantPart 
+      <ImplantPart
         name="Crown"
         geometry={crownGeo}
         position={[0, 1.2, 0]}
@@ -70,7 +89,7 @@ const CinematicImplant = () => {
         roughness={0.15}
         delay={0.2}
       />
-      <ImplantPart 
+      <ImplantPart
         name="Abutment"
         geometry={abutmentGeo}
         position={[0, 0.2, 0]}
@@ -80,7 +99,7 @@ const CinematicImplant = () => {
         roughness={0.2}
         delay={0.4}
       />
-      <ImplantPart 
+      <ImplantPart
         name="Screw"
         geometry={screwGeo}
         position={[0, -1.0, 0]}
@@ -102,13 +121,12 @@ export const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
   useEffect(() => {
     const tl = gsap.timeline();
 
-    // Text Reveal
-    tl.fromTo(textRef.current, 
-      { opacity: 0, scale: 0.8, letterSpacing: "20px" },
-      { opacity: 1, scale: 1, letterSpacing: "5px", duration: 1.5, ease: "power4.out" }
+    tl.fromTo(
+      textRef.current,
+      { opacity: 0, scale: 0.8, letterSpacing: '20px' },
+      { opacity: 1, scale: 1, letterSpacing: '5px', duration: 1.5, ease: 'power4.out' }
     );
 
-    // Fade out splash
     tl.to(containerRef.current, {
       opacity: 0,
       duration: 1,
@@ -116,40 +134,47 @@ export const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
       onComplete: () => {
         setVisible(false);
         onComplete();
-      }
+      },
     });
 
-    return () => { tl.kill(); };
+    return () => {
+      tl.kill();
+    };
   }, [onComplete]);
 
   if (!visible) return null;
 
   return (
     <div ref={containerRef} className="splash-screen">
-      <div className="splash-img-bg" style={{ 
-        backgroundImage: `url(${implantBg})`,
-        opacity: 0.03,
-        position: 'absolute',
-        inset: 0,
-        backgroundSize: 'contain',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        filter: 'grayscale(1) brightness(1.5)'
-      }}></div>
-      <div className="splash-bg"></div>
-      
+      <div
+        className="splash-img-bg"
+        style={{
+          backgroundImage: `url(${implantBg})`,
+          opacity: 0.03,
+          position: 'absolute',
+          inset: 0,
+          backgroundSize: 'contain',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          filter: 'grayscale(1) brightness(1.5)',
+        }}
+      />
+      <div className="splash-bg" />
+
       <div className="splash-canvas">
         <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
           <color attach="background" args={['#0A1922']} />
           <ambientLight intensity={0.4} />
           <pointLight position={[10, 10, 10]} intensity={1.5} color="#7ec8b8" />
           <pointLight position={[-10, -10, -10]} intensity={0.8} color="#6fa8dc" />
-          <Environment preset="city" />
-          
+          <Suspense fallback={null}>
+            <Environment preset="city" />
+          </Suspense>
+
           <Center>
             <CinematicImplant />
           </Center>
-          
+
           <Sparkles count={150} scale={10} size={1.5} speed={0.3} opacity={0.3} color="#7ec8b8" />
         </Canvas>
       </div>
@@ -158,12 +183,12 @@ export const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
         <div ref={textRef} className="splash-logo">
           <h1>LAZORD</h1>
           <div className="splash-loader">
-            <div className="loader-bar"></div>
+            <div className="loader-bar" />
           </div>
-          <p>M O D E R N   D E N T A L   L A B</p>
+          <p>M O D E R N &nbsp; D E N T A L &nbsp; L A B</p>
         </div>
       </div>
-      
+
       <style>{`
         .splash-screen {
           position: fixed;

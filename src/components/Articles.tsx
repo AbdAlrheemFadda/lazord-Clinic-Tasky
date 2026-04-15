@@ -1,13 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import labsImg from '../assets/images/labs.png';
 import teamImg from '../assets/images/team.png';
 import beforeImg from '../assets/images/before.png';
 import afterImg from '../assets/images/After.png';
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Custom Before/After Slider Component
 const BeforeAfterSlider = ({ before, after }: { before: string; after: string }) => {
@@ -26,7 +23,6 @@ const BeforeAfterSlider = ({ before, after }: { before: string; after: string })
   const handlePointerDown = (e: React.PointerEvent) => {
     isDragging.current = true;
     handleMove(e.clientX);
-    // Add touch-action none to prevent scrolling while dragging
     if (containerRef.current) containerRef.current.style.touchAction = 'none';
   };
 
@@ -41,9 +37,9 @@ const BeforeAfterSlider = ({ before, after }: { before: string; after: string })
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowLeft') {
-      setSliderPos(Math.max(0, sliderPos - 5));
+      setSliderPos((p) => Math.max(0, p - 5));
     } else if (e.key === 'ArrowRight') {
-      setSliderPos(Math.min(100, sliderPos + 5));
+      setSliderPos((p) => Math.min(100, p + 5));
     }
   };
 
@@ -63,19 +59,17 @@ const BeforeAfterSlider = ({ before, after }: { before: string; after: string })
       aria-label="Before and after comparison slider"
       onKeyDown={handleKeyDown}
     >
-      {/* Badge Tags embedded in the images */}
-      
       {/* After Image (Background) */}
       <div className="slider-image after-img" style={{ backgroundImage: `url(${after})` }}>
         <div className="slider-badge" style={{ right: '20px' }}>AFTER</div>
       </div>
 
       {/* Before Image (Foreground, Clipped) */}
-      <div 
-        className="slider-image before-img" 
-        style={{ 
-          backgroundImage: `url(${before})`, 
-          clipPath: `inset(0 ${100 - sliderPos}% 0 0)` 
+      <div
+        className="slider-image before-img"
+        style={{
+          backgroundImage: `url(${before})`,
+          clipPath: `inset(0 ${100 - sliderPos}% 0 0)`,
         }}
       >
         <div className="slider-badge" style={{ left: '20px' }}>BEFORE</div>
@@ -85,10 +79,10 @@ const BeforeAfterSlider = ({ before, after }: { before: string; after: string })
       <div className="slider-divider" style={{ left: `${sliderPos}%` }}>
         <div className="slider-handle">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
+            <polyline points="15 18 9 12 15 6" />
           </svg>
           <svg style={{ transform: 'rotate(180deg)' }} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
+            <polyline points="15 18 9 12 15 6" />
           </svg>
         </div>
       </div>
@@ -100,7 +94,7 @@ const BeforeAfterSlider = ({ before, after }: { before: string; after: string })
           height: 100%;
           cursor: ew-resize;
           user-select: none;
-          touch-action: pan-y; /* Allow vertical scroll unless dragging */
+          touch-action: pan-y;
           border-radius: var(--border-radius);
           overflow: hidden;
         }
@@ -130,10 +124,10 @@ const BeforeAfterSlider = ({ before, after }: { before: string; after: string })
           width: 44px;
           height: 44px;
           border-radius: 50%;
-          background: rgba(10, 25, 34, 0.85); /* Warm navy */
+          background: rgba(10, 25, 34, 0.85);
           backdrop-filter: blur(8px);
           -webkit-backdrop-filter: blur(8px);
-          border: 1px solid rgba(126, 200, 184, 0.3); /* Teal border */
+          border: 1px solid rgba(126, 200, 184, 0.3);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -178,10 +172,10 @@ export const Articles = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.article-layout-card', {
-        y: 50, 
-        opacity: 0, 
-        duration: 0.9, 
-        stagger: 0.15, 
+        y: 50,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.15,
         ease: 'power3.out',
         scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
       });
@@ -192,19 +186,18 @@ export const Articles = () => {
   return (
     <section id="articles" ref={sectionRef} className="articles-section container">
       <div className="section-header">
-        <h2>تعرف على المزيد حول مستقبل طب الأسنان وكيف يشكله لازورد.</h2>
+        <h2>طھط¹ط±ظپ ط¹ظ„ظ‰ ط§ظ„ظ…ط²ظٹط¯ ط­ظˆظ„ ظ…ط³طھظ‚ط¨ظ„ ط·ط¨ ط§ظ„ط£ط³ظ†ط§ظ† ظˆظƒظٹظپ ظٹط´ظƒظ„ظ‡ ظ„ط§ط²ظˆط±ط¯.</h2>
       </div>
 
       <div className="articles-layout">
-        
         {/* Main Case Study Column (Slider) */}
         <div className="article-layout-card case-study-card glass-panel">
           <div className="case-study-media">
             <BeforeAfterSlider before={beforeImg} after={afterImg} />
           </div>
           <div className="article-card-content">
-            <h3>دراسة حالة: 10 وحدات لتحويل ابتسامة الزركونيا</h3>
-            <button className="login-link">اقرأ المزيد ←</button>
+            <h3>ط¯ط±ط§ط³ط© ط­ط§ظ„ط©: 10 ظˆط­ط¯ط§طھ ظ„طھط­ظˆظٹظ„ ط§ط¨طھط³ط§ظ…ط© ط§ظ„ط²ط±ظƒظˆظ†ظٹط§</h3>
+            <button className="login-link">ط§ظ‚ط±ط£ ط§ظ„ظ…ط²ظٹط¯ â†گ</button>
           </div>
         </div>
 
@@ -212,31 +205,30 @@ export const Articles = () => {
         <div className="side-articles">
           <div className="article-layout-card side-card glass-panel">
             <div className="side-card-media">
-              <img src={labsImg} alt="داخل معمل لازورد للمستقبل" loading="lazy" />
+              <img src={labsImg} alt="ط¯ط§ط®ظ„ ظ…ط¹ظ…ظ„ ظ„ط§ط²ظˆط±ط¯ ظ„ظ„ظ…ط³طھظ‚ط¨ظ„" loading="lazy" />
             </div>
             <div className="article-card-content">
-              <h3>داخل معمل لازورد للمستقبل</h3>
-              <button className="login-link">اقرأ المزيد ←</button>
+              <h3>ط¯ط§ط®ظ„ ظ…ط¹ظ…ظ„ ظ„ط§ط²ظˆط±ط¯ ظ„ظ„ظ…ط³طھظ‚ط¨ظ„</h3>
+              <button className="login-link">ط§ظ‚ط±ط£ ط§ظ„ظ…ط²ظٹط¯ â†گ</button>
             </div>
           </div>
 
           <div className="article-layout-card side-card glass-panel">
             <div className="side-card-media">
-              <img src={teamImg} alt="كيف يعمل لازورد" loading="lazy" />
+              <img src={teamImg} alt="ظƒظٹظپ ظٹط¹ظ…ظ„ ظ„ط§ط²ظˆط±ط¯" loading="lazy" />
             </div>
             <div className="article-card-content">
-              <h3>كيف يعمل لازورد</h3>
-              <button className="login-link">اقرأ المزيد ←</button>
+              <h3>ظƒظٹظپ ظٹط¹ظ…ظ„ ظ„ط§ط²ظˆط±ط¯</h3>
+              <button className="login-link">ط§ظ‚ط±ط£ ط§ظ„ظ…ط²ظٹط¯ â†گ</button>
             </div>
           </div>
         </div>
-
       </div>
 
       <style>{`
         .articles-layout {
           display: grid;
-          grid-template-columns: 1.8fr 1fr; /* Emphasis on the slider card */
+          grid-template-columns: 1.8fr 1fr;
           gap: 30px;
           margin-top: 40px;
         }
@@ -255,7 +247,7 @@ export const Articles = () => {
 
         .case-study-media {
           width: 100%;
-          height: 480px; /* Large height for the Before/After comparison */
+          height: 480px;
           border-radius: var(--border-radius);
           overflow: hidden;
           margin-bottom: 24px;

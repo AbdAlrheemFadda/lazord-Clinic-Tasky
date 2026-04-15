@@ -23,7 +23,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci  # deterministic install — uses package-lock.json exactly
 
       - name: Build
         run: npm run build
