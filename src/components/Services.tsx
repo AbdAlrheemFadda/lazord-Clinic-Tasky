@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import zirconiaImg from '../assets/images/Zirconia Crowns.png';
 import implantImg from '../assets/images/Implant Solutions.png';
@@ -9,14 +10,16 @@ import guardsImg from '../assets/images/3D Printed Night Guards.png';
 import alignersImg from '../assets/images/Clear Aligners.png';
 import apneaImg from '../assets/images/Sleep Apnea Devices.png';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const products = [
-  { name: 'طھظٹط¬ط§ظ† ط§ظ„ط²ط±ظƒظˆظ†ظٹط§ ظ„ظ…ط¯ط© 5 ط£ظٹط§ظ…', image: zirconiaImg },
-  { name: 'ط­ظ„ظˆظ„ ط²ط±ط§ط¹ط© ط§ظ„ط£ط³ظ†ط§ظ† ط§ظ„ط´ط§ظ…ظ„ط©', image: implantImg },
-  { name: 'ط·ظ‚ظ… ط§ظ„ط£ط³ظ†ط§ظ† ط°ظˆ ط§ظ„ظ…ظˆط¹ط¯ ط§ظ„ط«ط§ظ†ظٹ', image: denturesImg },
-  { name: 'ط£ط¬ط²ط§ط، ظ…ط¨ط§ط´ط±ط© ط¥ظ„ظ‰ ط§ظ„ظ†ظ‡ط§ظٹط©', image: partialsImg },
-  { name: 'ظˆط§ظ‚ظٹط§طھ ظ„ظٹظ„ظٹط© ظ…ط·ط¨ظˆط¹ط© ط¨طھظ‚ظ†ظٹط© ط«ظ„ط§ط«ظٹط© ط§ظ„ط£ط¨ط¹ط§ط¯', image: guardsImg },
-  { name: 'طھظ‚ظˆظٹظ… ط§ظ„ط£ط³ظ†ط§ظ† ط§ظ„ط´ظپط§ظپ', image: alignersImg },
-  { name: 'ط£ط¬ظ‡ط²ط© ط¹ظ„ط§ط¬ ط§ظ†ظ‚ط·ط§ط¹ ط§ظ„طھظ†ظپط³ ط£ط«ظ†ط§ط، ط§ظ„ظ†ظˆظ…', image: apneaImg },
+  { name: 'تيجان الزركونيا لمدة 5 أيام', image: zirconiaImg },
+  { name: 'حلول زراعة الأسنان الشاملة', image: implantImg },
+  { name: 'طقم الأسنان ذو الموعد الثاني', image: denturesImg },
+  { name: 'أجزاء مباشرة إلى النهاية', image: partialsImg },
+  { name: 'واقيات ليلية مطبوعة بتقنية ثلاثية الأبعاد', image: guardsImg },
+  { name: 'تقويم الأسنان الشفاف', image: alignersImg },
+  { name: 'أجهزة علاج انقطاع التنفس أثناء النوم', image: apneaImg },
 ];
 
 export const Services = () => {
@@ -42,16 +45,16 @@ export const Services = () => {
   return (
     <section id="services" ref={sectionRef} className="services-section container">
       <div className="section-header">
-        <span className="section-tag">ط§ظ„ظ…ظ†طھط¬ط§طھ</span>
-        <h2>ط£ط·ظ„ظ‚ ط§ظ„ط¹ظ†ط§ظ† ظ„ظ„ط§ط¨طھظƒط§ط± ط§ظ„ط±ط§ط¦ط¯ ظپظٹ ط§ظ„ط³ظˆظ‚ ظ…ط¹ ظ…ط®طھط¨ط± ط·ط¨ ط§ظ„ط£ط³ظ†ط§ظ† ط§ظ„ط®ط§طµ ط¨ظ†ط§</h2>
-        <p>ظ„ط§ ظٹظ…ظƒظ† طھط­ظ‚ظٹظ‚ طھط±ظ…ظٹظ…ط§طھ ظ…طھط³ظ‚ط© ظˆظ…ظ„ط§ط¦ظ…ط© ط¥ظ„ط§ ظ…ظ† ط®ظ„ط§ظ„ ط§ظ„طھظˆط§طµظ„ ط§ظ„ظ‚ظˆظٹ. ظپظٹ ظ„ط§ط²ظˆط±ط¯طŒ ظ‚ظ…ظ†ط§ ط¨طھط·ظˆظٹط± ط·ط±ظ‚ ظ…ط¨طھظƒط±ط© ظ„ظ„طھط¹ط§ظˆظ† ظ…ط¹ ط£ط·ط¨ط§ط، ط§ظ„ط£ط³ظ†ط§ظ† ظ„ط¯ظٹظ†ط§ ط¨ط§ط³طھط®ط¯ط§ظ… ظ‚ظˆط© ط§ظ„طھظƒظ†ظˆظ„ظˆط¬ظٹط§ ظ„ط¥ط¹ط§ط¯ط© طھط¹ط±ظٹظپ ظ…ط§ ظ‡ظˆ ظ…ظ…ظƒظ† ظ„ظƒظ„ ظ…ط±ظٹط¶.</p>
+        <span className="section-tag">المنتجات</span>
+        <h2>أطلق العنان للابتكار الرائد في السوق مع مختبر طب الأسنان الخاص بنا</h2>
+        <p>لا يمكن تحقيق ترميمات متسقة وملائمة إلا من خلال التواصل القوي. في لازورد، قمنا بتطوير طرق مبتكرة للتعاون مع أطباء الأسنان لدينا باستخدام قوة التكنولوجيا لإعادة تعريف ما هو ممكن لكل مريض.</p>
       </div>
 
       <div className="services-grid products-grid">
-        {products.map((product) => (
-          <div key={product.name} className="product-card glass-panel flex-card">
+        {products.map((product, idx) => (
+          <div key={idx} className="product-card glass-panel flex-card">
             <div className="card-image-wrapper">
-              <img src={product.image} alt={product.name} className="card-image" loading="lazy" />
+              <img src={product.image} alt={product.name} className="card-image" />
             </div>
             <div className="card-content">
               <h4>{product.name}</h4>
@@ -61,7 +64,7 @@ export const Services = () => {
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
-        <button className="btn-primary">ط§ط³طھظƒط´ظپ ط¬ظ…ظٹط¹ ظ…ظ†طھط¬ط§طھ ط§ظ„ظ…ط®طھط¨ط±</button>
+        <button className="btn-primary">استكشف جميع منتجات المختبر</button>
       </div>
 
       <style>{`

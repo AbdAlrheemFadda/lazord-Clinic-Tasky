@@ -1,37 +1,40 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import digitalScanImg from '../assets/images/digital scanlond.png';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const steps = [
   {
-    num: 'ظ،',
-    title: 'ط§ظ„ظ…ط³ط­ ط§ظ„ط¶ظˆط¦ظٹ ط¨ط¯ظ‚ط© ظˆ ط«ظ‚ط© ظˆط¯ظ‚ط©',
-    desc: 'ط§ط³طھط®ط¯ظ… ط§ظ„ظ…ط§ط³ط­ ط§ظ„ط¶ظˆط¦ظٹ 3Shape TRIOS ط§ظ„ظ…ط¬ط§ظ†ظٹ ظ„ظ„ط­طµظˆظ„ ط¹ظ„ظ‰ ظ…ط³ط­ ط±ظ‚ظ…ظٹ ط¯ظ‚ظٹظ‚ ظ…ط¹ ظ…ط±ط§ط¬ط¹ط§طھ ظپظˆط±ظٹط©.',
+    num: '١',
+    title: 'المسح الضوئي بدقة و ثقة ودقة',
+    desc: 'استخدم الماسح الضوئي 3Shape TRIOS المجاني للحصول على مسح رقمي دقيق مع مراجعات فورية.',
   },
   {
-    num: 'ظ¢',
-    title: 'ط§ط·ظ„ط¨ ط§ظ„ط¹ظ…ظ„ ط§ظ„ظ…ط®طھط¨ط±ظٹ ط¨ط§ط³طھط®ط¯ط§ظ… ط§ظ„ظˆطµظپط§طھ ط§ظ„ط·ط¨ظٹط© ط§ظ„ط±ظ‚ظ…ظٹط©',
-    desc: 'ط¥ط±ط³ط§ظ„ ط·ظ„ط¨ط§طھ ط§ظ„ط¹ظ…ظ„ ط§ظ„ظ…ط®ط¨ط±ظٹ ط¨ط³ظ‡ظˆظ„ط© ظ…ط¹ ظˆطµظپط§طھ ط±ظ‚ظ…ظٹط© ظ…طھظƒط§ظ…ظ„ط© ظˆظƒط§ظ…ظ„ط©.',
+    num: '٢',
+    title: 'اطلب العمل المختبري باستخدام الوصفات الطبية الرقمية',
+    desc: 'إرسال طلبات العمل المخبري بسهولة مع وصفات رقمية متكاملة وكاملة.',
   },
   {
-    num: 'ظ£',
-    title: 'ط§ظ„ظ…ظˆط§ظپظ‚ط© ط¹ظ„ظ‰ ط§ظ„طھطµط§ظ…ظٹظ… ط§ظ„ط±ظ‚ظ…ظٹط© ظ‚ط¨ظ„ ط§ظ„طھطµظ†ظٹط¹',
-    desc: 'ط±ط§ط¬ط¹ ظˆظˆط§ظپظ‚ ط¹ظ„ظ‰ ط§ظ„طھطµظ…ظٹظ…ط§طھ ط«ظ„ط§ط«ظٹط© ط§ظ„ط£ط¨ط¹ط§ط¯ ظ„ظ„ط­ط§ظ„ط§طھ ظ‚ط¨ظ„ ط¹ظ…ظ„ظٹط© ط§ظ„طھطµظ†ظٹط¹.',
+    num: '٣',
+    title: 'الموافقة على التصاميم الرقمية قبل التصنيع',
+    desc: 'راجع ووافق على التصميمات ثلاثية الأبعاد للحالات قبل عملية التصنيع.',
   },
   {
-    num: 'ظ¤',
-    title: 'طھطھط¨ط¹ ط§ظ„ط­ط§ظ„ط§طھ ظپظٹ ط§ظ„ظˆظ‚طھ ط§ظ„ظپط¹ظ„ظٹ',
-    desc: 'ظ…طھط§ط¨ط¹ط© ط­ط§ظ„ط© ط§ظ„ط¹ظ…ظ„ ط§ظ„ظ…ط®ط¨ط±ظٹ ظˆطھظ‚ط¯ظ…ظ‡ ظپظٹ ط£ظٹ ظˆظ‚طھ ظˆظ…ظ† ط£ظٹ ظ…ظƒط§ظ†.',
+    num: '٤',
+    title: 'تتبع الحالات في الوقت الفعلي',
+    desc: 'متابعة حالة العمل المخبري وتقدمه في أي وقت ومن أي مكان.',
   },
   {
-    num: 'ظ¥',
-    title: 'طھط³ظ„ظٹظ… ط§ظ„ط¹ظ„ط§ط¬ ظ„ظ„ظ…ط±ظٹط¶ ظپظٹ ط£ظٹط§ظ…',
-    desc: 'طھط³ظ„ظٹظ… ظ†طھط§ط¦ط¬ ط¹ط§ظ„ظٹط© ط§ظ„ط¬ظˆط¯ط© ظپظٹ ظپطھط±ط© ط²ظ…ظ†ظٹط© ظ‚طµظٹط±ط© ظ…ط¹ ط¶ظ…ط§ظ† ط±ط¶ط§ ط§ظ„ظ…ط±ظٹط¶.',
+    num: '٥',
+    title: 'تسليم العلاج للمريض في أيام',
+    desc: 'تسليم نتائج عالية الجودة في فترة زمنية قصيرة مع ضمان رضا المريض.',
   },
   {
-    num: 'ظ¦',
-    title: 'ظƒظٹظپ ظٹطھظ… ظ…ظ‚ط§ط±ظ†ط© ظ„ط§ط²ظˆط±ط¯ ظ…ط¹ ظ…ط®طھط¨ط±ط§طھ ط§ظ„ط£ط³ظ†ط§ظ† ط§ظ„ط£ط®ط±ظ‰',
-    desc: 'ط§ظƒطھط´ظپ ط§ظ„ظپط±ظ‚ ظپظٹ ط§ظ„ط¬ظˆط¯ط© ظˆط§ظ„ط³ط±ط¹ط© ظˆط§ظ„طھظˆط§طµظ„ ط§ظ„ط±ظ‚ظ…ظٹ ط§ظ„ظ…طھظƒط§ظ…ظ„.',
+    num: '٦',
+    title: 'كيف يتم مقارنة لازورد مع مختبرات الأسنان الأخرى',
+    desc: 'اكتشف الفرق في الجودة والسرعة والتواصل الرقمي المتكامل.',
   },
 ];
 
@@ -40,6 +43,7 @@ export const Workflow = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Fade in the image from the right
       gsap.from('.workflow-image-wrapper', {
         x: 60,
         opacity: 0,
@@ -51,6 +55,7 @@ export const Workflow = () => {
         },
       });
 
+      // Fade in steps from the left
       gsap.from('.workflow-step', {
         x: -40,
         opacity: 0,
@@ -69,24 +74,25 @@ export const Workflow = () => {
   return (
     <section id="workflow" ref={sectionRef} className="workflow-section container">
       <div className="section-header">
-        <span className="section-tag">ط³ظٹط± ط§ظ„ط¹ظ…ظ„</span>
-        <h2>ظ‚ظ… ط¨طھط­ظˆظٹظ„ ظ…ظ…ط§ط±ط³ط§طھظƒ ط¨ط§ط³طھط®ط¯ط§ظ… ط³ظٹط± ط¹ظ…ظ„ ط±ظ‚ظ…ظٹ ظ…ط«ط¨طھ</h2>
-        <p>ط§ط³طھظ…طھط¹ ط¨ظ…ط³طھظˆظ‰ ظ…ظ† ط§ظ„طھط­ظƒظ… ظ„ظ… ظٹظƒظ† ظ…ظ…ظƒظ†ظ‹ط§ ظ…ظ† ظ‚ط¨ظ„.</p>
-        <p style={{ marginTop: '15px' }}>ظ„ط§ ظٹظ…ظƒظ† طھط­ظ‚ظٹظ‚ طھط±ظ…ظٹظ…ط§طھ ظ…طھط³ظ‚ط© ظˆظ…ظ„ط§ط¦ظ…ط© ط¥ظ„ط§ ظ…ظ† ط®ظ„ط§ظ„ ط§ظ„طھظˆط§طµظ„ ط§ظ„ظ‚ظˆظٹ. ظپظٹ ظ„ط§ط²ظˆط±ط¯طŒ ظ‚ظ…ظ†ط§ ط¨طھط·ظˆظٹط± ط·ط±ظ‚ ظ…ط¨طھظƒط±ط© ظ„ظ„طھط¹ط§ظˆظ† ظ…ط¹ ط£ط·ط¨ط§ط، ط§ظ„ط£ط³ظ†ط§ظ† ظ„ط¯ظٹظ†ط§ ط¨ط§ط³طھط®ط¯ط§ظ… ظ‚ظˆط© ط§ظ„طھظƒظ†ظˆظ„ظˆط¬ظٹط§ ظ„ط¥ط¹ط§ط¯ط© طھط¹ط±ظٹظپ ظ…ط§ ظ‡ظˆ ظ…ظ…ظƒظ† ظ„ظƒظ„ ظ…ط±ظٹط¶.</p>
+        <span className="section-tag">سير العمل</span>
+        <h2>قم بتحويل ممارساتك باستخدام سير عمل رقمي مثبت</h2>
+        <p>استمتع بمستوى من التحكم لم يكن ممكنًا من قبل.</p>
+        <p style={{ marginTop: '15px' }}>لا يمكن تحقيق ترميمات متسقة وملائمة إلا من خلال التواصل القوي. في لازورد، قمنا بتطوير طرق مبتكرة للتعاون مع أطباء الأسنان لدينا باستخدام قوة التكنولوجيا لإعادة تعريف ما هو ممكن لكل مريض.</p>
       </div>
 
       <div className="workflow-layout">
+        {/* Left Side: Image */}
         <div className="workflow-image-column">
-          {/* Fixed: added position:relative so ::after pseudo-element anchors correctly */}
-          <div className="workflow-image-wrapper glass-panel" style={{ position: 'relative' }}>
-            <img src={digitalScanImg} alt="ط³ظٹط± ط§ظ„ط¹ظ…ظ„ ط§ظ„ط±ظ‚ظ…ظٹ ظˆط§ظ„طھظˆط§طµظ„" className="workflow-img" loading="lazy" />
+          <div className="workflow-image-wrapper glass-panel">
+            <img src={digitalScanImg} alt="سير العمل الرقمي والتواصل" className="workflow-img" />
           </div>
         </div>
 
+        {/* Right Side: Steps */}
         <div className="workflow-steps-column">
           <div className="workflow-steps">
-            {steps.map((step) => (
-              <div key={step.num} className="workflow-step">
+            {steps.map((step, i) => (
+              <div key={i} className="workflow-step">
                 <div className="workflow-step-number">{step.num}</div>
                 <div className="workflow-step-content">
                   <h4>{step.title}</h4>

@@ -1,5 +1,8 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const Pricing = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -24,72 +27,47 @@ export const Pricing = () => {
   return (
     <section id="pricing" ref={sectionRef} className="pricing-section container">
       <div className="section-header">
-        <span className="section-tag">ط§ظ„طھط³ط¹ظٹط±</span>
-        <h2>ط®ط·ط· ظ…ط±ظ†ط© ظ„ظ…ظ…ط§ط±ط³طھظƒ</h2>
-        <p>ظ†ط­ظ† ظ†ظ‚ط¯ظ… ط´ظپط§ظپظٹط© طھط§ظ…ط© ظپظٹ ط§ظ„ط£ط³ط¹ط§ط± ظ…ط¹ ط®ظٹط§ط±ط§طھ طھظ†ط§ط³ط¨ ط¬ظ…ظٹط¹ ط£ط­ط¬ط§ظ… ط§ظ„ط¹ظٹط§ط¯ط§طھ.</p>
+        <span className="section-tag">التسعير</span>
+        <h2>خطط مرنة لممارستك</h2>
+        <p>نحن نقدم شفافية تامة في الأسعار مع خيارات تناسب جميع أحجام العيادات.</p>
       </div>
 
       <div className="about-grid">
-        {/* Free Plan */}
         <div className="pricing-card glass-panel" style={{ padding: '40px', textAlign: 'center' }}>
-          <h3>ط§ظ„ط®ظٹط§ط± ط§ظ„ط±ظ‚ظ…ظٹ ط§ظ„ظ…ط¬ط§ظ†ظٹ</h3>
+          <h3>الخيار الرقمي المجاني</h3>
           <div style={{ fontSize: '2.5rem', margin: '20px 0', color: 'var(--accent-cyan)' }}>$0</div>
-          <p style={{ marginBottom: '20px' }}>ط§ط­طµظ„ ط¹ظ„ظ‰ ط§ظ„ظ…ط§ط³ط­ ط§ظ„ط¶ظˆط¦ظٹ ط¯ط§ط®ظ„ ط§ظ„ظپظ… ظ…ط¬ط§ظ†ظ‹ط§ ط¹ظ†ط¯ ط§ظ„ط¨ط¯ط، ط¨ط§ظ„ط¹ظ…ظ„ ظ…ط¹ ظ…ط®طھط¨ط±ظ†ط§.</p>
+          <p style={{ marginBottom: '20px' }}>احصل على الماسح الضوئي داخل الفم مجانًا عند البدء بالعمل مع مختبرنا.</p>
           <ul style={{ listStyle: 'none', padding: 0, marginBottom: '30px', color: 'var(--text-muted)' }}>
-            <li style={{ marginBottom: '10px' }}>âœ“ ظ…ط§ط³ط­ ط¶ظˆط¦ظٹ 3Shape TRIOS</li>
-            <li style={{ marginBottom: '10px' }}>âœ“ طھط¯ط±ظٹط¨ ط؛ظٹط± ظ…ط­ط¯ظˆط¯ ظ„ظ„ظپط±ظٹظ‚</li>
-            <li style={{ marginBottom: '10px' }}>âœ“ ط¯ط¹ظ… ظپظ†ظٹ ط¹ظ„ظ‰ ظ…ط¯ط§ط± ط§ظ„ط³ط§ط¹ط©</li>
+            <li style={{ marginBottom: '10px' }}>✓ ماسح ضوئي 3Shape TRIOS</li>
+            <li style={{ marginBottom: '10px' }}>✓ تدريب غير محدود للفريق</li>
+            <li style={{ marginBottom: '10px' }}>✓ دعم فني على مدار الساعة</li>
           </ul>
-          <button className="btn-primary">ط§ط¨ط¯ط£ ط§ظ„ط¢ظ†</button>
+          <button className="btn-primary">ابدأ الآن</button>
         </div>
 
-        {/* Featured Plan â€” fixed: added position:relative so the badge positions correctly */}
-        <div
-          className="pricing-card glass-panel"
-          style={{
-            padding: '40px',
-            textAlign: 'center',
-            borderColor: 'var(--accent-cyan)',
-            position: 'relative',
-          }}
-        >
-          <div style={{
-            position: 'absolute',
-            top: '10px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            background: 'var(--accent-cyan)',
-            color: '#0A1922',
-            padding: '4px 14px',
-            borderRadius: '12px',
-            fontSize: '0.78rem',
-            fontWeight: 'bold',
-            whiteSpace: 'nowrap',
-          }}>
-            ط§ظ„ط£ظƒط«ط± ط·ظ„ط¨ظ‹ط§
-          </div>
-          <h3 style={{ marginTop: '20px' }}>طھظٹط¬ط§ظ† ط§ظ„ط²ط±ظƒظˆظ†ظٹط§</h3>
-          <div style={{ fontSize: '2.5rem', margin: '20px 0', color: 'var(--accent-cyan)' }}>طھظˆط§طµظ„ ظ…ط¹ظ†ط§</div>
-          <p style={{ marginBottom: '20px' }}>ط¬ظˆط¯ط© ظپط§ط¦ظ‚ط© ظپظٹ 5 ط£ظٹط§ظ… ظپظ‚ط· ظ…ط¹ ط¶ظ…ط§ظ† ط§ظ„ظ…ظ„ط§ط،ظ…ط© ط§ظ„طھط§ظ…ط©.</p>
+        <div className="pricing-card glass-panel" style={{ padding: '40px', textAlign: 'center', borderColor: 'var(--accent-cyan)' }}>
+          <div style={{ position: 'absolute', top: '10px', left: '50%', transform: 'translateX(-50%)', background: 'var(--accent-cyan)', color: '#0A1922', padding: '4px 14px', borderRadius: '12px', fontSize: '0.78rem', fontWeight: 'bold' }}>الأكثر طلبًا</div>
+          <h3>تيجان الزركونيا</h3>
+          <div style={{ fontSize: '2.5rem', margin: '20px 0', color: 'var(--accent-cyan)' }}>تواصل معنا</div>
+          <p style={{ marginBottom: '20px' }}>جودة فائقة في 5 أيام فقط مع ضمان الملاءمة التامة.</p>
           <ul style={{ listStyle: 'none', padding: 0, marginBottom: '30px', color: 'var(--text-muted)' }}>
-            <li style={{ marginBottom: '10px' }}>âœ“ طھط³ظ„ظٹظ… ظپظٹ 5 ط£ظٹط§ظ…</li>
-            <li style={{ marginBottom: '10px' }}>âœ“ طھطµظ…ظٹظ… ط±ظ‚ظ…ظٹ ط¯ظ‚ظٹظ‚</li>
-            <li style={{ marginBottom: '10px' }}>âœ“ طھظˆط§طµظ„ ظ…ط¨ط§ط´ط± ظ…ط¹ ط§ظ„ظپظ†ظٹ</li>
+            <li style={{ marginBottom: '10px' }}>✓ تسليم في 5 أيام</li>
+            <li style={{ marginBottom: '10px' }}>✓ تصميم رقمي دقيق</li>
+            <li style={{ marginBottom: '10px' }}>✓ تواصل مباشر مع الفني</li>
           </ul>
-          <button className="btn-primary">ط§ط·ظ„ط¨ ط¹ط±ط¶ ط³ط¹ط±</button>
+          <button className="btn-primary">اطلب عرض سعر</button>
         </div>
 
-        {/* Enterprise Plan */}
         <div className="pricing-card glass-panel" style={{ padding: '40px', textAlign: 'center' }}>
-          <h3>ط§ظ„ط­ظ„ظˆظ„ ط§ظ„ظƒط§ظ…ظ„ط©</h3>
-          <div style={{ fontSize: '2.5rem', margin: '20px 0', color: 'var(--accent-cyan)' }}>ظ…ط®طµطµ</div>
-          <p style={{ marginBottom: '20px' }}>ط­ظ„ظˆظ„ ظ…طھظƒط§ظ…ظ„ط© ظ„ظ„ط¹ظٹط§ط¯ط§طھ ط§ظ„ظƒط¨ظٹط±ط© ظˆط§ظ„ظ…ط¬ظ…ط¹ط§طھ ط§ظ„ط·ط¨ظٹط©.</p>
+          <h3>الحلول الكاملة</h3>
+          <div style={{ fontSize: '2.5rem', margin: '20px 0', color: 'var(--accent-cyan)' }}>مخصص</div>
+          <p style={{ marginBottom: '20px' }}>حلول متكاملة للعيادات الكبيرة والمجمعات الطبية.</p>
           <ul style={{ listStyle: 'none', padding: 0, marginBottom: '30px', color: 'var(--text-muted)' }}>
-            <li style={{ marginBottom: '10px' }}>âœ“ ط³ظٹط± ط¹ظ…ظ„ ط±ظ‚ظ…ظٹ ط¨ط§ظ„ظƒط§ظ…ظ„</li>
-            <li style={{ marginBottom: '10px' }}>âœ“ طھظ‚ظٹظٹظ…ط§طھ ط­ط§ظ„ط© 5 ظ†ط¬ظˆظ…</li>
-            <li style={{ marginBottom: '10px' }}>âœ“ ط¨ظˆط§ط¨ط© طھطھط¨ط¹ ط§ظ„ط­ط§ظ„ط§طھ</li>
+            <li style={{ marginBottom: '10px' }}>✓ سير عمل رقمي بالكامل</li>
+            <li style={{ marginBottom: '10px' }}>✓ تقييمات حالة 5 نجوم</li>
+            <li style={{ marginBottom: '10px' }}>✓ بوابة تتبع الحالات</li>
           </ul>
-          <button className="btn-secondary">طھط­ط¯ط« ظ…ط¹ ط®ط¨ظٹط±</button>
+          <button className="btn-secondary">تحدث مع خبير</button>
         </div>
       </div>
     </section>

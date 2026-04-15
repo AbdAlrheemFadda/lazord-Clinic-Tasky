@@ -53,8 +53,7 @@
 }
 
 html {
-  /* scroll-behavior intentionally omitted — Lenis handles smooth scrolling */
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
 }
 
 html,

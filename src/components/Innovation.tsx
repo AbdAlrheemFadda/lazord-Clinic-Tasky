@@ -1,30 +1,33 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import collaborativeImg from '../assets/images/Collaborative Workflow.png';
 import innovativeImg from '../assets/images/Innovative Products.png';
 import digitalLabImg from '../assets/images/Fully Digital Lab.png';
 import expertiseImg from '../assets/images/Expertise on Demand.png';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const cardData = [
   {
-    title: 'ط³ظٹط± ط§ظ„ط¹ظ…ظ„ ط§ظ„طھط¹ط§ظˆظ†ظٹ',
-    text: 'ط§ط­طµظ„ ط¹ظ„ظ‰ ظ…ط±ط§ط¬ط¹ط§طھ ط§ظ„ظ…ط³ط­ ظپظٹ ط§ظ„ظˆظ‚طھ ط§ظ„ظپط¹ظ„ظٹ ظˆط§ط¹طھظ…ط¯ طھطµظ…ظٹظ…ط§طھ ط§ظ„ط­ط§ظ„ط§طھ ط«ظ„ط§ط«ظٹط© ط§ظ„ط£ط¨ط¹ط§ط¯ ظ„ظ„طھط­ظƒظ… ط§ظ„ظ†ظ‡ط§ط¦ظٹ ظپظٹ ط¹ظ…ظ„ظƒ ط§ظ„ظ…ط®طھط¨ط±ظٹ.',
+    title: 'سير العمل التعاوني',
+    text: 'احصل على مراجعات المسح في الوقت الفعلي واعتمد تصميمات الحالات ثلاثية الأبعاد للتحكم النهائي في عملك المختبري.',
     image: collaborativeImg,
   },
   {
-    title: 'ط§ظ„ظ…ظ†طھط¬ط§طھ ط§ظ„ظ…ط¨طھظƒط±ط©',
-    text: 'ظ‚ظ… ط¨طھظ‚ط¯ظٹظ… ط®ط¯ظ…ط§طھ طھط؛ظٹط± ظ‚ظˆط§ط¹ط¯ ط§ظ„ظ„ط¹ط¨ط© ظ…ط«ظ„ ط§ظ„طھظٹط¬ط§ظ† ظ„ظ…ط¯ط© 5 ط£ظٹط§ظ…طŒ ظˆط£ط·ظ‚ظ… ط§ظ„ط£ط³ظ†ط§ظ† ط°ط§طھ ط§ظ„ظ…ظˆط¹ط¯ ط§ظ„ظ†ظ‡ط§ط¦ظٹطŒ ظˆط§ظ„ط£ط¬ط²ط§ط، ط§ظ„ط¬ط²ط¦ظٹط© ط§ظ„ظ…ط¨ط§ط´ط±ط© ط­طھظ‰ ط§ظ„ظ†ظ‡ط§ظٹط©.',
+    title: 'المنتجات المبتكرة',
+    text: 'قم بتقديم خدمات تغير قواعد اللعبة مثل التيجان لمدة 5 أيام، وأطقم الأسنان ذات الموعد النهائي، والأجزاء الجزئية المباشرة حتى النهاية.',
     image: innovativeImg,
   },
   {
-    title: 'ظ…ط®طھط¨ط± ط±ظ‚ظ…ظٹ ط¨ط§ظ„ظƒط§ظ…ظ„',
-    text: 'ظٹظ…ظƒظ†ظƒ ط§ظ„ظˆطµظˆظ„ ط¥ظ„ظ‰ ظپظ†ظٹظٹظ†ط§ ط°ظˆظٹ ط§ظ„ظ…ط³طھظˆظ‰ ط§ظ„ط¹ط§ظ„ظ…ظٹ ط§ظ„ط°ظٹظ† ظٹطھظ…طھط¹ظˆظ† ط¨ط£ط­ط¯ط« طھظ‚ظ†ظٹط§طھ ط·ط¨ ط§ظ„ط£ط³ظ†ط§ظ† ظˆط£ظˆظ‚ط§طھ ط§ظ„طھط³ظ„ظٹظ… ط§ظ„ط±ط§ط¦ط¯ط© ظپظٹ ط§ظ„طµظ†ط§ط¹ط©.',
+    title: 'مختبر رقمي بالكامل',
+    text: 'يمكنك الوصول إلى فنيينا ذوي المستوى العالمي الذين يتمتعون بأحدث تقنيات طب الأسنان وأوقات التسليم الرائدة في الصناعة.',
     image: digitalLabImg,
   },
   {
-    title: 'ط§ظ„ط®ط¨ط±ط© ط¹ظ†ط¯ ط§ظ„ط·ظ„ط¨',
-    text: 'ظٹظ…ظƒظ†ظƒ ط§ظ„ظˆطµظˆظ„ ط¥ظ„ظ‰ ط®ط¨ط±ط§طھظ†ط§ ط§ظ„ط³ط±ظٹط±ظٹظٹظ† ظ„ظ„ط­طµظˆظ„ ط¹ظ„ظ‰ ط¥ط±ط´ط§ط¯ط§طھ ظˆط¯ط¹ظ… ط´ط®طµظٹظٹظ† ط¹ط¨ط± ط§ظ„ظ‡ط§طھظپ ط£ظˆ ط§ظ„ط±ط³ط§ط¦ظ„ ط§ظ„ظ†طµظٹط© ط£ظˆ ط§ظ„ط¨ط±ظٹط¯ ط§ظ„ط¥ظ„ظƒطھط±ظˆظ†ظٹ ط£ظˆ ط§ظ„ط¯ط±ط¯ط´ط© ط§ظ„ظ…ط¨ط§ط´ط±ط© ط®ظ„ط§ظ„ ط¯ظ‚ط§ط¦ظ‚.',
+    title: 'الخبرة عند الطلب',
+    text: 'يمكنك الوصول إلى خبراتنا السريريين للحصول على إرشادات ودعم شخصيين عبر الهاتف أو الرسائل النصية أو البريد الإلكتروني أو الدردشة المباشرة خلال دقائق.',
     image: expertiseImg,
   },
 ];
@@ -45,19 +48,19 @@ export const Innovation = () => {
   return (
     <section id="solutions" ref={sectionRef} className="innovation-section container">
       <div className="section-header">
-        <span className="section-tag">ط§ظ„ط§ط¨طھظƒط§ط±</span>
-        <h2>طھط¹ط²ظٹط² ظ…ط³طھظ‚ط¨ظ„ ط·ط¨ ط§ظ„ط£ط³ظ†ط§ظ† ط§ظ„ط±ظ‚ظ…ظٹ</h2>
+        <span className="section-tag">الابتكار</span>
+        <h2>تعزيز مستقبل طب الأسنان الرقمي</h2>
         <p>
-          ظ„ط§ ظٹظ…ظƒظ† طھط­ظ‚ظٹظ‚ طھط±ظ…ظٹظ…ط§طھ ظ…طھط³ظ‚ط© ظˆظ…ظ„ط§ط¦ظ…ط© ط¥ظ„ط§ ظ…ظ† ط®ظ„ط§ظ„ ط§ظ„طھظˆط§طµظ„ ط§ظ„ظ‚ظˆظٹ. ظپظٹ ظ„ط§ط²ظˆط±ط¯طŒ ظ‚ظ…ظ†ط§ ط¨طھط·ظˆظٹط± ط·ط±ظ‚ ظ…ط¨طھظƒط±ط© ظ„ظ„طھط¹ط§ظˆظ† ظ…ط¹ ط£ط·ط¨ط§ط، ط§ظ„ط£ط³ظ†ط§ظ† ظ„ط¯ظٹظ†ط§ ط¨ط§ط³طھط®ط¯ط§ظ… ظ‚ظˆط© ط§ظ„طھظƒظ†ظˆظ„ظˆط¬ظٹط§ ظ„ط¥ط¹ط§ط¯ط© طھط¹ط±ظٹظپ ظ…ط§ ظ‡ظˆ ظ…ظ…ظƒظ† ظ„ظƒظ„ ظ…ط±ظٹط¶.
+          لا يمكن تحقيق ترميمات متسقة وملائمة إلا من خلال التواصل القوي. في لازورد، قمنا بتطوير طرق مبتكرة للتعاون مع أطباء الأسنان لدينا باستخدام قوة التكنولوجيا لإعادة تعريف ما هو ممكن لكل مريض.
         </p>
       </div>
 
       <div className="about-grid innovation-cards-grid">
-        {cardData.map((card) => (
-          <div key={card.title} className="feature-card-cinematic glass-panel">
-            <div className="card-highlight" />
+        {cardData.map((card, i) => (
+          <div key={i} className="feature-card-cinematic glass-panel">
+            <div className="card-highlight"></div>
             <div className="card-image-wrapper">
-              <img src={card.image} alt={card.title} className="card-image" loading="lazy" />
+              <img src={card.image} alt={card.title} className="card-image" />
             </div>
             <h3>{card.title}</h3>
             <p>{card.text}</p>

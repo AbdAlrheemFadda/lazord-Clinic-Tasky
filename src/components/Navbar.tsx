@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
 const navLinks = [
-  { name: 'ط§ظ„ط±ط¦ظٹط³ظٹط©', href: '#home' },
-  { name: 'ظ„ظ…ط§ط°ط§ ظ„ط§ط²ظˆط±ط¯', href: '#about' },
-  { name: 'ط®ط¯ظ…ط§طھ ط§ظ„ظ…ط®طھط¨ط±ط§طھ', href: '#services' },
-  { name: 'ط§ظ„ط­ظ„ظˆظ„', href: '#solutions' },
-  { name: 'ط§ظ„طھط³ط¹ظٹط±', href: '#pricing' },
-  { name: 'ط§ظ„طھط¹ظ„ظ…', href: '#learning' },
+  { name: 'الرئيسية', href: '#home' },
+  { name: 'لماذا لازورد', href: '#about' },
+  { name: 'خدمات المختبرات', href: '#services' },
+  { name: 'الحلول', href: '#solutions' },
+  { name: 'التسعير', href: '#pricing' },
+  { name: 'التعلم', href: '#learning' },
 ];
 
 export const Navbar = () => {
@@ -82,7 +82,7 @@ export const Navbar = () => {
               <circle cx="50" cy="50" r="3" fill="#fff" />
             </svg>
           </div>
-          <span className="logo-text">ظ„ط§ط²ظˆط±ط¯</span>
+          <span className="logo-text">لازورد</span>
         </div>
 
         <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
@@ -99,14 +99,14 @@ export const Navbar = () => {
         </div>
 
         <div className="nav-actions">
-          <span className="nav-phone" style={{ marginLeft: '15px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>ظ‡ط§طھظپ: 0599998531-(970)</span>
-          <a href="#" className="login-link">طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„</a>
-          <button className="btn-primary">ط§ط¨ط¯ط£ ط§ظ„ط¢ظ†</button>
+          <span className="nav-phone" style={{ marginLeft: '15px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>هاتف: 0599998531-(970)</span>
+          <a href="#" className="login-link">تسجيل الدخول</a>
+          <button className="btn-primary">ابدأ الآن</button>
         </div>
 
         <button 
           className="menu-toggle" 
-          aria-label="ط§ظ„ظ‚ط§ط¦ظ…ط©"
+          aria-label="القائمة"
           aria-expanded={isMenuOpen}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
