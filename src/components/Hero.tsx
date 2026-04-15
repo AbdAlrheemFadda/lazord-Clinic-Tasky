@@ -29,7 +29,8 @@ export const Hero = () => {
 
       <div className="hero-content container">
         <div className="hero-badge">
-          مستقبل طب الأسنان الرقمي
+          <span className="badge-dot"></span>
+          <span className="badge-text">مستقبل طب الأسنان الرقمي</span>
         </div>
 
         <h1 className="hero-title">
