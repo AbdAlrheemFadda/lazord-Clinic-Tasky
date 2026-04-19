@@ -3,7 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Sparkles, Text, Environment, Center } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
-import implantBg from '../assets/images/dental-implant.png';
+import implantBg from '../assets/images/dental-implant.webp';
 
 const ImplantPart = ({ position, rotation, color, metalness, roughness, geometry, delay, name }: any) => {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -100,26 +100,28 @@ export const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline();
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline();
 
-    // Text Reveal
-    tl.fromTo(textRef.current, 
-      { opacity: 0, scale: 0.8, letterSpacing: "20px" },
-      { opacity: 1, scale: 1, letterSpacing: "5px", duration: 1.5, ease: "power4.out" }
-    );
+      // Text Reveal
+      tl.fromTo(textRef.current, 
+        { opacity: 0, scale: 0.8, letterSpacing: "20px" },
+        { opacity: 1, scale: 1, letterSpacing: "5px", duration: 1.2, ease: "power4.out" }
+      );
 
-    // Fade out splash
-    tl.to(containerRef.current, {
-      opacity: 0,
-      duration: 1,
-      delay: 3.5,
-      onComplete: () => {
-        setVisible(false);
-        onComplete();
-      }
-    });
+      // Fade out splash
+      tl.to(containerRef.current, {
+        opacity: 0,
+        duration: 0.8,
+        delay: 2.2, // Snappier loading
+        onComplete: () => {
+          setVisible(false);
+          onComplete();
+        }
+      });
+    }, containerRef);
 
-    return () => { tl.kill(); };
+    return () => ctx.revert();
   }, [onComplete]);
 
   if (!visible) return null;
@@ -140,17 +142,19 @@ export const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
       
       <div className="splash-canvas">
         <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-          <color attach="background" args={['#0A1922']} />
-          <ambientLight intensity={0.4} />
-          <pointLight position={[10, 10, 10]} intensity={1.5} color="#7ec8b8" />
-          <pointLight position={[-10, -10, -10]} intensity={0.8} color="#6fa8dc" />
-          <Environment preset="city" />
-          
-          <Center>
-            <CinematicImplant />
-          </Center>
-          
-          <Sparkles count={150} scale={10} size={1.5} speed={0.3} opacity={0.3} color="#7ec8b8" />
+          <React.Suspense fallback={null}>
+            <color attach="background" args={['#0A1922']} />
+            <ambientLight intensity={0.4} />
+            <pointLight position={[10, 10, 10]} intensity={1.5} color="#7ec8b8" />
+            <pointLight position={[-10, -10, -10]} intensity={0.8} color="#6fa8dc" />
+            <Environment preset="city" />
+            
+            <Center>
+              <CinematicImplant />
+            </Center>
+            
+            <Sparkles count={150} scale={10} size={1.5} speed={0.3} opacity={0.3} color="#7ec8b8" />
+          </React.Suspense>
         </Canvas>
       </div>
 

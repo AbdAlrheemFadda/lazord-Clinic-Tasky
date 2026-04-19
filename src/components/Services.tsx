@@ -1,25 +1,25 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import zirconiaImg from '../assets/images/Zirconia Crowns.png';
-import implantImg from '../assets/images/Implant Solutions.png';
-import denturesImg from '../assets/images/Full Dentures.png';
-import partialsImg from '../assets/images/Removable Partial Dentures.png';
-import guardsImg from '../assets/images/3D Printed Night Guards.png';
-import alignersImg from '../assets/images/Clear Aligners.png';
-import apneaImg from '../assets/images/Sleep Apnea Devices.png';
+import zirconiaImg from "../assets/images/Zirconia Crowns.webp";
+import implantImg from "../assets/images/Implant Solutions.webp";
+import denturesImg from "../assets/images/Full Dentures.webp";
+import partialsImg from "../assets/images/Removable Partial Dentures.webp";
+import guardsImg from "../assets/images/3D Printed Night Guards.webp";
+import alignersImg from "../assets/images/Clear Aligners.webp";
+import apneaImg from "../assets/images/Sleep Apnea Devices.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const products = [
-  { name: 'تيجان الزركونيا لمدة 5 أيام', image: zirconiaImg },
-  { name: 'حلول زراعة الأسنان الشاملة', image: implantImg },
-  { name: 'طقم الأسنان ذو الموعد الثاني', image: denturesImg },
-  { name: 'أجزاء مباشرة إلى النهاية', image: partialsImg },
-  { name: 'واقيات ليلية مطبوعة بتقنية ثلاثية الأبعاد', image: guardsImg },
-  { name: 'تقويم الأسنان الشفاف', image: alignersImg },
-  { name: 'أجهزة علاج انقطاع التنفس أثناء النوم', image: apneaImg },
+  { name: "تيجان الزركونيا لمدة 5 أيام", image: zirconiaImg },
+  { name: "حلول زراعة الأسنان الشاملة", image: implantImg },
+  { name: "طقم الأسنان ذو الموعد الثاني", image: denturesImg },
+  { name: "أجزاء مباشرة إلى النهاية", image: partialsImg },
+  { name: "واقيات ليلية مطبوعة بتقنية ثلاثية الأبعاد", image: guardsImg },
+  { name: "تقويم الأسنان الشفاف", image: alignersImg },
+  { name: "أجهزة علاج انقطاع التنفس أثناء النوم", image: apneaImg },
 ];
 
 export const Services = () => {
@@ -27,15 +27,15 @@ export const Services = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from('.product-card', {
+      gsap.from(".product-card", {
         y: 40,
         opacity: 0,
         duration: 0.7,
         stagger: 0.1,
-        ease: 'power3.out',
+        ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 75%',
+          start: "top 75%",
         },
       });
     }, sectionRef);
@@ -43,18 +43,32 @@ export const Services = () => {
   }, []);
 
   return (
-    <section id="services" ref={sectionRef} className="services-section container">
+    <section
+      id="services"
+      ref={sectionRef}
+      className="services-section container"
+    >
       <div className="section-header">
         <span className="section-tag">المنتجات</span>
-        <h2>أطلق العنان للابتكار الرائد في السوق مع مختبر طب الأسنان الخاص بنا</h2>
-        <p>لا يمكن تحقيق ترميمات متسقة وملائمة إلا من خلال التواصل القوي. في لازورد، قمنا بتطوير طرق مبتكرة للتعاون مع أطباء الأسنان لدينا باستخدام قوة التكنولوجيا لإعادة تعريف ما هو ممكن لكل مريض.</p>
+        <h2>
+          أطلق العنان للابتكار الرائد في السوق مع مختبر طب الأسنان الخاص بنا
+        </h2>
+        <p>
+          لا يمكن تحقيق ترميمات متسقة وملائمة إلا من خلال التواصل القوي. في
+          لازورد، قمنا بتطوير طرق مبتكرة للتعاون مع أطباء الأسنان لدينا باستخدام
+          قوة التكنولوجيا لإعادة تعريف ما هو ممكن لكل مريض.
+        </p>
       </div>
 
       <div className="services-grid products-grid">
         {products.map((product, idx) => (
           <div key={idx} className="product-card glass-panel flex-card">
             <div className="card-image-wrapper">
-              <img src={product.image} alt={product.name} className="card-image" />
+              <img
+                src={product.image}
+                alt={product.name}
+                className="card-image"
+              />
             </div>
             <div className="card-content">
               <h4>{product.name}</h4>
@@ -63,7 +77,9 @@ export const Services = () => {
         ))}
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
+      <div
+        style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}
+      >
         <button className="btn-primary">استكشف جميع منتجات المختبر</button>
       </div>
 

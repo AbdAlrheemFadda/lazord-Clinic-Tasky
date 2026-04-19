@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import collaborativeImg from '../assets/images/Collaborative Workflow.png';
-import innovativeImg from '../assets/images/Innovative Products.png';
-import digitalLabImg from '../assets/images/Fully Digital Lab.png';
-import expertiseImg from '../assets/images/Expertise on Demand.png';
+import collaborativeImg from '../assets/images/Collaborative Workflow.webp';
+import innovativeImg from '../assets/images/Innovative Products.webp';
+import digitalLabImg from '../assets/images/Fully Digital Lab.webp';
+import expertiseImg from '../assets/images/Expertise on Demand.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 

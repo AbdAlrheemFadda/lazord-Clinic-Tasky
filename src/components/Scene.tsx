@@ -5,10 +5,10 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import clinicImg from '../assets/images/clinic-interior.png';
-import techImg from '../assets/images/dental-technology.png';
-import smileImg from '../assets/images/smile-closeup.png';
-import crownImg from '../assets/images/dental-crown.png';
+import clinicImg from '../assets/images/clinic-interior.webp';
+import techImg from '../assets/images/dental-technology.webp';
+import smileImg from '../assets/images/smile-closeup.webp';
+import crownImg from '../assets/images/dental-crown.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 

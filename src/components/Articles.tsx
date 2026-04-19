@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import labsImg from '../assets/images/labs.png';
-import teamImg from '../assets/images/team.png';
-import beforeImg from '../assets/images/before.png';
-import afterImg from '../assets/images/After.png';
+import labsImg from '../assets/images/labs.webp';
+import teamImg from '../assets/images/team.webp';
+import beforeImg from '../assets/images/before.webp';
+import afterImg from '../assets/images/After.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 

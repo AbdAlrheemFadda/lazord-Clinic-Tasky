@@ -1,43 +1,48 @@
-# Lazord Dental - Futuristic Dental Lab
+# Lazord Dental - Digital Dental Lab
 
-A premium, high-performance web application for Lazord Dental Lab, featuring immersive 3D visualizations, smooth cinematic transitions, and a modern medical aesthetic.
+## Welcome
 
-## 🚀 Features
+This project is a website for Lazord Digital Dental Lab. It blends modern medical aesthetics with advanced interactive technologies to deliver a unique visual experience that reflects the lab's digital identity.
 
-- **Immersive 3D Scene**: Interactive 3D dental components using Three.js and React Three Fiber.
-- **Cinematic Motion**: Smooth scroll-based reveals and transitions powered by GSAP and Lenis.
-- **Responsive Design**: Fully optimized for all devices with a mobile-first approach.
-- **SEO Optimized**: Complete metadata, Open Graph tags, and accessibility features.
-- **Performance Focused**: Code splitting and optimized asset loading.
+---
 
-## 🛠️ Tech Stack
+## Key Features
 
-- **Framework**: React 18
-- **Build Tool**: Vite
-- **3D Engine**: Three.js / React Three Fiber
-- **Animation**: GSAP (GreenSock)
-- **Smooth Scroll**: Lenis
-- **Styling**: Vanilla CSS (Custom Design System)
+- Interactive 3D models built with Three.js that move with the cursor, creating a realistic and immersive feel.
+- Smooth, cinematic scrolling motion powered by GSAP and Lenis.
+- An elegant splash screen that transitions seamlessly into the main interface.
+- Fully responsive design across all devices, from large desktop screens to mobile phones.
+- Comprehensive SEO optimization, including full metadata and social media tags.
+- High performance with smart code splitting and on-demand asset loading.
 
-## 📦 Deployment
+---
 
-The project is configured for automatic deployment via **GitHub Actions**.
+## Technologies Used
 
-1. **Push to GitHub**: Every push to the `main` branch will trigger a build and deploy to GitHub Pages.
-2. **Base Path**: The application is configured with the base path `/lazord-Clinic-Task/` to ensure all assets load correctly on GitHub Pages.
-3. **Local Testing**:
-   ```bash
-   npm install
-   npm run dev
-   ```
-4. **Manual Build**:
-   ```bash
-   npm run build
-   ```
-   The output in `dist/` is optimized for production hosting.
+- Framework: React 18
+- Build Tool: Vite
+- 3D Engine: Three.js with React Three Fiber
+- Animation: GSAP
+- Smooth Scroll: Lenis
+- Styling: Vanilla CSS
 
-## 🌐 SEO & Social
+---
 
-- **Robots.txt**: Included in `public/`
-- **Metadata**: Comprehensive meta tags in `index.html`
-- **Base Path**: Configured as relative (`./`) for flexible hosting.
+## How to Run and Deploy
+
+Deployment is fully automated via GitHub Actions. Every time you push changes to the `main` branch, the site automatically builds and deploys to GitHub Pages.
+
+To run the project locally:
+- npm install
+- npm run dev
+
+To generate a production build:
+- npm run build
+
+The output will be in the `dist` folder, ready for any hosting service.
+
+---
+
+## Technical Note
+
+The base path is set to `/lazord-Clinic-Task/` to ensure all assets load correctly when deployed on GitHub Pages.

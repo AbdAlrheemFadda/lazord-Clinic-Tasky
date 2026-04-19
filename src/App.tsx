@@ -24,6 +24,10 @@ export default function App() {
   const [showSplash, setShowSplash] = React.useState(true);
   const mainRef = useRef<HTMLElement>(null);
 
+  const handleSplashComplete = React.useCallback(() => {
+    setShowSplash(false);
+  }, []);
+
   useEffect(() => {
     // Scroll to top on load/splash complete
     if (!showSplash) {
@@ -121,17 +125,19 @@ export default function App() {
 
   return (
     <>
-      {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
-      
-      <div className="canvas-container">
-        <Canvas
-          camera={{ position: [0, 0, 6], fov: 40 }}
-          dpr={[1, 2]}
-          gl={{ antialias: true, alpha: true }}
-        >
-          <Scene />
-        </Canvas>
-      </div>
+      <React.Suspense fallback={null}>
+        {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
+        
+        <div className="canvas-container">
+          <Canvas
+            camera={{ position: [0, 0, 6], fov: 40 }}
+            dpr={[1, 2]}
+            gl={{ antialias: true, alpha: true }}
+          >
+            <Scene />
+          </Canvas>
+        </div>
+      </React.Suspense>
 
       <div className={`app-content ${showSplash ? 'hidden' : 'visible'}`}>
         <Navbar />
